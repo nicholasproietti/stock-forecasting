@@ -29,9 +29,13 @@ We use the `yfinance` package to download daily price data. For instance, to ana
 
 We begin by visualizing the return series and its properties. Daily returns of individual stocks typically have **heavy-tailed distributions** (more extreme values than a normal distribution) and little autocorrelation. For example, the histogram below shows Amazon’s daily return distribution, which is sharply peaked with fat tails (leptokurtic).
 
+![Distribution of Amazon daily returns (2013–2023)](figures/DIST_AMZN.png)
+
 &#x20;*Figure: **Distribution of Amazon daily returns** (2013–2023). The histogram (blue bars) has a narrow center and long tails, indicating frequent small changes and rare large shocks. Such heavy tails are common in financial returns.*
 
 We also examine autocorrelation: the ACF/PACF plots confirm that returns are nearly uncorrelated at all nonzero lags (the spike at lag 0 is trivial). This aligns with the Efficient Market Hypothesis that short-term returns are hard to predict.
+
+![ACF and PACF of daily returns](figures/ACF_PCF.png)
 
 &#x20;*Figure: **ACF and PACF of daily returns**. The autocorrelation and partial autocorrelation coefficients are essentially zero for all lags >0, indicating no obvious linear autocorrelation structure beyond randomness.*
 
@@ -74,6 +78,8 @@ We split the data into an in-sample (first \~8 years) and hold-out test (last 2 
 * **XGBoost:** The gradient boosting model (not shown in figure for clarity) similarly produces small fluctuations.
 
 We then form **ensembles** of the model forecasts to see if combining them improves accuracy. One approach is a weighted average where models with lower RMSE get higher weight. This weighted ensemble (purple line) smooths out individual errors.
+
+![Forecasts vs Actual Returns (test period 2021–2023)](figures/Forecasts_vs_Actual.png)
 
 &#x20;*Figure: **Forecasts vs Actual Returns** (test period 2021–2023). Black line = actual returns. Colored lines are forecasts from each model (dashed for ARIMA/Prophet/LSTM, solid for ensemble). All models and the ensemble stay near zero most of the time. Major spikes (±10%) in returns are *not* accurately predicted by any model, reflecting the difficulty of daily stock return forecasting.*
 
