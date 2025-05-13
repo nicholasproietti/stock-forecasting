@@ -1,0 +1,13 @@
+pandas
+numpy
+matplotlib
+seaborn
+yfinance
+statsmodels
+arch
+prophet
+tensorflow
+xgboost
+shap
+scikit-learn
+pmdarima
